@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>드래그앤드롭</title>
+    <script src="./api-dragdrop.js"></script>
+</head>
+<style>
+    h1 {
+        text-align: center;
+    }
+
+    #dropBox {
+        border: 2px solid #333;
+        width: 600px;
+        height: 100px;
+        margin: 20px auto;
+        padding: 10px;
+        background-color: aquamarine;
+    }
+
+    #dragBox {
+        width: 800px;
+        margin: 0 auto;
+    }
+
+    #dragBox img {
+        border: 1px solid #ff0000;
+        width: 80px;
+        height: auto;
+        padding: 20px;
+    }
+</style>
+<body>
+    <h1>원하는 차를 카트에 담아주세요.</h1>
+    <div id="dropBox" ondrop="allowDrop(e)"></div> <br>
+    -+
+    <div id="dragBox">
+        <img id="car1" src="./img/car1.png" alt="car1" draggable="true">
+        <img id="car2" src="./img/car2.png" alt="car2" draggable="true">
+        <img id="car3" src="./img/car3.png" alt="car3" draggable="true">
+        <img id="car4" src="./img/car4.png" alt="car4" draggable="true">
+        <img id="car5" src="./img/car5.png" alt="car5" draggable="true">
+    </div>
+</body>
+
+<script>
+    // const tg = document.getElementById('dragBox').getElementsByTagName('img');
+
+    function allowDrop(e) {
+        e.preventDefault();
+    }
+
+    function drag(e) {
+        e.dataTransfer.setData("text", ev.target.id)
+    }
+
+    function drop(e) {
+
+    }
+</script>
+</html>
