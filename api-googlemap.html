@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>지오로케이션</title>
+
+</head>
+<style>
+    .wrap {
+        width: 600px;
+        margin: 0 auto;
+        text-align: center;
+    }
+
+    h1 {
+        margin-bottom: 50px;
+        text-align: center;
+    }
+
+    p span {
+        font-weight: bold;
+        text-decoration: underline;
+        color: blueviolet;
+    }
+
+</style>
+<body>
+    <div class="wrap">
+        <h1>현재 위치의 위도/경도는?</h1>
+        <button onclick="locationEventHandler()">위도/경도 출력하기</button>
+        <p>현재 위도는 <span id="lat"></span> 입니다.</p>
+        <p>현재 경도는 <span id="long"></span> 입니다.</p>
+    </div>
+</body>
+
+<script>
+    function locationEventHandler() {
+        if (navigator.geolocation) {
+            navigator.geolocation.getCurrentPosition(showPosition);
+            // debugger;
+        } else {
+            alert('브라우저가 Geolocation을 지원하지 않습니다.')
+        }
+    }
+
+    function showPosition(posi) {
+        document.getElementById('lat').innerText = posi.coords.latitude;
+        document.getElementById('long').innerText = posi.coords.longitude;
+    }
+
+</script>
+</html>

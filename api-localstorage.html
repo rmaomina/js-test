@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>로컬스토리지 사용하기</title>
+
+</head>
+<style>
+    .wrap {
+        width: 600px;
+        margin: 0 auto;
+    }
+
+    h1 {
+        margin-bottom: 50px;
+        text-align: center;
+    }
+
+    p {
+        font-size: 16px;
+        text-align: center;
+        color: pink;
+    }
+
+    .memo-item {
+        float: left;
+        width: 100%;
+        margin-bottom: 20px;
+        padding: 20px;
+        border-radius: 10px;
+        border: 1px solid #999;
+        text-align: center;
+        box-sizing: border-box;
+    }
+
+    textarea {
+        box-sizing: border-box;
+        resize: none;
+        width: 100%;
+        margin-bottom: 10px;
+        padding: 10px;
+        border: 1px solid #ccc;
+        border-radius: 10px;
+        background-color: #fff;
+        text-align: left;
+        font-size: 16px;
+    }
+
+</style>
+<body onload="pageload()">
+    <div class="wrap">
+        <h1>메모를 작성해 보세요</h1>
+        <div class="memo-item">
+            <textarea name="txtBox" id="txtBox" onkeyup="saveText()" rows="5"></textarea>
+            <input id="memoClear" type="button" value="메모삭제" onclick="clr()">
+        </div>
+        <p id="msg"></p>
+    </div>
+</body>
+
+<script>
+    const msg = document.getElementById('msg');
+
+    function pageload() {
+        memo = document.getElementById('txtBox');
+        memo.value = localStorage.getItem('memo');
+    }
+
+    function saveText() {
+        msg.style.color = 'lightgreen';
+        msg.innerText = '메모내용이 자동 저장되었습니다.';
+        
+        localStorage.setItem('memo', document.getElementById('txtBox').value);
+
+        clrGuide();
+    }
+
+    function clr() {
+        localStorage.clear();
+        msg.style.color = 'red';
+        msg.innerText = '메모가 삭제되었습니다';
+
+        clrGuide();
+    }
+
+    function clrGuide() {
+        setTimeout(function(){
+            msg.innerText = '';
+        }, 2000)
+    }
+</script>
+</html>

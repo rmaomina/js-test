@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>드래그앤드롭</title>
-    <script src="./api-dragdrop.js"></script>
+    
 </head>
 <style>
     h1 {
@@ -13,12 +13,14 @@
     }
 
     #dropBox {
-        border: 2px solid #333;
         width: 600px;
-        height: 100px;
         margin: 20px auto;
         padding: 10px;
-        background-color: aquamarine;
+        border: 2px dashed gray;
+        border-radius: 5px;
+        background-color: lightgray;
+        text-align: center;
+        padding: 60px 0;
     }
 
     #dragBox {
@@ -34,15 +36,15 @@
     }
 </style>
 <body>
-    <h1>원하는 차를 카트에 담아주세요.</h1>
-    <div id="dropBox" ondrop="allowDrop(e)"></div> <br>
-    -+
+    <h1>원하는 차를 카트에 담아주세요</h1>
+    <div id="dropBox" ondrop="drop(event)" ondragover="allowDrop(event)"></div>
+    <br>
     <div id="dragBox">
-        <img id="car1" src="./img/car1.png" alt="car1" draggable="true">
-        <img id="car2" src="./img/car2.png" alt="car2" draggable="true">
-        <img id="car3" src="./img/car3.png" alt="car3" draggable="true">
-        <img id="car4" src="./img/car4.png" alt="car4" draggable="true">
-        <img id="car5" src="./img/car5.png" alt="car5" draggable="true">
+        <img id="car1" src="./img/car1.png" alt="car1" draggable="true" ondragstart="drag(event)">
+        <img id="car2" src="./img/car2.png" alt="car2" draggable="true" ondragstart="drag(event)">
+        <img id="car3" src="./img/car3.png" alt="car3" draggable="true" ondragstart="drag(event)">
+        <img id="car4" src="./img/car4.png" alt="car4" draggable="true" ondragstart="drag(event)">
+        <img id="car5" src="./img/car5.png" alt="car5" draggable="true" ondragstart="drag(event)">
     </div>
 </body>
 
@@ -54,11 +56,16 @@
     }
 
     function drag(e) {
-        e.dataTransfer.setData("text", ev.target.id)
+        e.dataTransfer.setData('text', e.target.id)
     }
 
     function drop(e) {
+        e.preventDefault();
 
+        const car = e.dataTransfer.getData('text');
+        console.log(car);
+
+        e.target.appendChild(document.getElementById(car));
     }
 </script>
 </html>

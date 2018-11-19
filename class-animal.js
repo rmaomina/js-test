@@ -23,5 +23,5 @@ class Rabbit extends Animal {
 
 let rabbit = new Rabbit ('White Rabbit');
 
-rabbit.run(10);  //White rabbit runs 
-rabbit.stop();
+rabbit.run(10);  //White rabbit runs with speed 10
+rabbit.hide();  //White rabbit hides!
