@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>지오로케이션</title>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBP3jpr8vCuicxHbCVDoRl6q23F8S-1EEY" type="text/javascript"></script>
 
 </head>
 <style>
@@ -25,29 +26,75 @@
         color: blueviolet;
     }
 
+    #googleMap {
+        width: 100%;
+        height: 300px;
+        background-color: greenyellow
+    }
+
 </style>
 <body>
     <div class="wrap">
         <h1>현재 위치의 위도/경도는?</h1>
-        <button onclick="locationEventHandler()">위도/경도 출력하기</button>
+        <button onclick="showCurrentPosition()">위도/경도 출력하기</button>
         <p>현재 위도는 <span id="lat"></span> 입니다.</p>
         <p>현재 경도는 <span id="long"></span> 입니다.</p>
+        <br>
+        <div id="googleMap"></div>
     </div>
 </body>
 
 <script>
-    function locationEventHandler() {
+    window.onload = getLocation();
+    let lat, lng, myCenter;
+
+    //Get Location 
+    function getLocation() {
         if (navigator.geolocation) {
-            navigator.geolocation.getCurrentPosition(showPosition);
-            // debugger;
+            navigator.geolocation.getCurrentPosition(currentLocation);
         } else {
             alert('브라우저가 Geolocation을 지원하지 않습니다.')
         }
     }
 
-    function showPosition(posi) {
-        document.getElementById('lat').innerText = posi.coords.latitude;
-        document.getElementById('long').innerText = posi.coords.longitude;
+    //Get Current Position
+    function currentLocation(posi) {
+        lat = p.coords.latitude;
+        lng = p.coords.longitude;
+
+        myCenter = new google.maps.LatLng(leti, long);
+        console.log(lat, lng);
+        initMap();
+    }
+
+    function initMap() {
+        let mapProp = {
+            center: myCenter,
+            zoom: 16,
+            mapTypeId: google.maps.MapTypeId.ROADMAP
+        };
+
+        let map = new google.maps.Map(document.getElementById('googleMap'), mapProp);
+
+        let marker = new google.maps.Marker({
+            position: myCenter,
+            animation: google.maps.Animation.BOUNCE
+        });
+
+        marker.setMap(map);
+    }
+
+    function findMyPosition() {
+        if (navigator.geolocation) {
+            navigator.geolocation.getCurrentPosition(showPosition);
+        } else {
+            alert('브라우저가 Geolocation을 지원하지 않습니다.')
+        }
+    }
+
+    function showCurrentPosition(leti, long) {
+        document.getElementById('lat').innerText = leti;
+        document.getElementById('long').innerText = long;
     }
 
 </script>
