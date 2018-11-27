@@ -36,9 +36,9 @@
 <body>
     <div class="wrap">
         <h1>현재 위치의 위도/경도는?</h1>
-        <button onclick="showCurrentPosition()">위도/경도 출력하기</button>
+        <button onclick="showPosition()">위도/경도 출력하기</button>
         <p>현재 위도는 <span id="lat"></span> 입니다.</p>
-        <p>현재 경도는 <span id="long"></span> 입니다.</p>
+        <p>현재 경도는 <span id="lng"></span> 입니다.</p>
         <br>
         <div id="googleMap"></div>
     </div>
@@ -59,10 +59,10 @@
 
     //Get Current Position
     function currentLocation(posi) {
-        lat = p.coords.latitude;
-        lng = p.coords.longitude;
+        lat = posi.coords.latitude;
+        lng = posi.coords.longitude;
 
-        myCenter = new google.maps.LatLng(leti, long);
+        myCenter = new google.maps.LatLng(lat, lng);
         console.log(lat, lng);
         initMap();
     }
@@ -84,17 +84,9 @@
         marker.setMap(map);
     }
 
-    function findMyPosition() {
-        if (navigator.geolocation) {
-            navigator.geolocation.getCurrentPosition(showPosition);
-        } else {
-            alert('브라우저가 Geolocation을 지원하지 않습니다.')
-        }
-    }
-
-    function showCurrentPosition(leti, long) {
-        document.getElementById('lat').innerText = leti;
-        document.getElementById('long').innerText = long;
+    function showPosition(leti, long) {
+        document.getElementById('lat').innerText = lat;
+        document.getElementById('lng').innerText = lng;
     }
 
 </script>
