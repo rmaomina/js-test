@@ -11,20 +11,36 @@
 <body>
     <h1>AJAX 함수</h1>
     <h2>서버로 form 쿼리스트링 전달하기</h2>
-    <form action="">
-        이름: <input type="text"><br/>
+    <form action="" id="hobbyForm">
+        이름: <input type="text" name="username"><br/>
         취미: <input type="checkbox" name="hobby" value="pokemonGO"> 포켓몬고
         <input type="checkbox" name="hobby" value="climbing"> 등산
-        <input type="checkbox" name="hobby" value="dancing"> 댄싱 <br/>
+        <input type="checkbox" name="hobby" value="dancing"> 댄싱 <br/><br/>
         <input type="button" id="show" value="전송"><br/>
     </form>
-    <div id="result"></div>
+    <div id="result1"></div>
+
+    <h2>서버로 form 쿼리스트링 전달하기</h2>
+    <form action="" id="singupForm">
+        아이디: <input type="text" name="userid"><br/>
+        비밀번호: <input type="text" name="userpw"><br/><br/>
+        <input type="button" id="submit" value="전송"><br/>
+    </form>
+    <div id="result2"></div>
 </body>
 <script>
     $(document).ready(function(){
         $('#show').click(function(){
-            let query = $('form').serialize();
-            $('#result').text(query);
+            const query = $('form#hobbyForm').serialize();
+            $('#result1').text(query);
+        });
+
+        $.getScript('src/split.js');
+        $('#submit').click(function(){
+            const query2 = $('form#singupForm').serialize();
+            const txt = splitProc(query2);
+            
+            $('#result2').text(splitProc(query2));
         });
     });
 </script>

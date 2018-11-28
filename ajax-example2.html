@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+    <title>AJAX 활용</title>
+</head>
+<style>
+    .color1 {
+        color: red;
+    }
+    .color2 {
+        color: orange;
+    }
+    .color3 {
+        color: yellow;
+    }
+    .color4 {
+        color: green;
+    }
+    .color5 {
+        color: blue;
+    }
+    .color6 {
+        color: darkblue;
+    }
+    .color7 {
+        color: purple;
+    }
+</style>
+<body>
+    <h1>AJAX 함수</h1>
+    <h2>each로 반복</h2>
+    <div>
+        <p>red</p>
+        <p>orange</p>
+        <p>yellow</p>
+        <p>green</p>
+        <p>blue</p>
+        <p>darkblue</p>
+        <p>purple</p>
+    </div>
+    <h2>json 데이터 가져오기</h2>
+    <input type="button" id="getJson" value="json데이터 가져오기">
+    <div id="result"></div>
+</body>
+<script>
+    $(document).ready(function(){
+        let i = 1;
+        $('p').each(function(){
+            $(this).addClass('color' + i);
+            // console.log('color' + i);
+            i++;
+        });
+
+        $('#getJson').click(function(){
+            $.getJSON('src/json-text.txt', function(data){
+                return alert(data.id + ', ' + data.pw);
+            });
+            console.log(data);
+            // $('#result').text(data.id + ', ' + data.pw);
+        })
+    });
+</script>
+</html>
