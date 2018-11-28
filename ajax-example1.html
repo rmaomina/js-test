@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+    <title>AJAX 활용</title>
+</head>
+<body>
+    <h1>AJAX 함수</h1>
+    <h2>서버로 form 쿼리스트링 전달하기</h2>
+    <form action="">
+        이름: <input type="text"><br/>
+        취미: <input type="checkbox" name="hobby" value="pokemonGO"> 포켓몬고
+        <input type="checkbox" name="hobby" value="climbing"> 등산
+        <input type="checkbox" name="hobby" value="dancing"> 댄싱 <br/>
+        <input type="button" id="show" value="전송"><br/>
+    </form>
+    <div id="result"></div>
+</body>
+<script>
+    $(document).ready(function(){
+        $('#show').click(function(){
+            let query = $('form').serialize();
+            $('#result').text(query);
+        });
+    });
+</script>
+</html>
