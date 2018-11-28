@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ko">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -8,64 +8,99 @@
     
 </head>
 <style>
+    body {
+        background-color:beige;
+    }
+
     h1 {
         text-align: center;
     }
 
-    #dropBox {
-        width: 600px;
-        margin: 20px auto;
-        padding: 10px;
-        border: 2px dashed gray;
-        border-radius: 5px;
-        background-color: lightgray;
-        text-align: center;
-        padding: 60px 0;
-    }
-
-    #dragBox {
-        width: 800px;
+    .graph-area {
+        width: 400px;
         margin: 0 auto;
-    }
-
-    #dragBox img {
-        border: 1px solid #ff0000;
-        width: 80px;
-        height: auto;
-        padding: 20px;
     }
 </style>
 <body>
-    <h1>원하는 차를 카트에 담아주세요</h1>
-    <div id="dropBox" ondrop="drop(event)" ondragover="allowDrop(event)"></div>
+    <h1> 캔버스로 그래프 그리기 </h1>
     <br>
-    <div id="dragBox">
-        <img id="car1" src="./img/car1.png" alt="car1" draggable="true" ondragstart="drag(event)">
-        <img id="car2" src="./img/car2.png" alt="car2" draggable="true" ondragstart="drag(event)">
-        <img id="car3" src="./img/car3.png" alt="car3" draggable="true" ondragstart="drag(event)">
-        <img id="car4" src="./img/car4.png" alt="car4" draggable="true" ondragstart="drag(event)">
-        <img id="car5" src="./img/car5.png" alt="car5" draggable="true" ondragstart="drag(event)">
+    <div class="graph-area">
+        <canvas id="graph" width="400" height="300"></canvas>
     </div>
 </body>
 
 <script>
-    // const tg = document.getElementById('dragBox').getElementsByTagName('img');
+    function initialize(){
+        graph.width = document.getElementById('graph').offsetWidth;
+        graph.height = document.getElementById('graph').offsetHeight;
+    }
+    initialize();
 
-    function allowDrop(e) {
-        e.preventDefault();
+    const graphInfo = {
+        title: "전국 미세먼지 농도",
+        max: 35,
+        data: [
+            {city: "서울", range: 23, color: "#fe802c"},
+            {city: "경기", range: 19, color: "#ffd100"}, 
+            {city: "대전", range: 10, color: "#81d733"},
+            {city: "대구", range: 23, color: "#666666"},
+            {city: "부산", range: 10, color: "#43cbff"},
+            {city: "전주", range: 23, color: "#3183c2"},
+            {city: "제주", range: 4, color: "#d4155b"}
+        ]
     }
 
-    function drag(e) {
-        e.dataTransfer.setData('text', e.target.id)
+    function drowGraph() {
+        const ctx = graph.getContext("2d");
+	    const data = graphInfo;
+
+        // 초기설정
+        ctx.fillStyle = "white";
+        ctx.fillRect(0, 0, graph.width, graph.height);
+
+        // 타이틀
+        ctx.beginPath();
+        ctx.fillStyle = "black";
+        ctx.font = "24px Arial";
+        ctx.textAlign = "center";
+        ctx.fillText(data.title, graph.width / 2, 50);
+
+        // 눈금선
+        ctx.font = "14px Arial";
+        ctx.textAlign = "right";
+        ctx.textBaseline = "middle";
+        for(let i = 0; i <= data.max; i += 5) {
+            let y = 65 + i *4.5;
+            ctx.moveTo(50,y);
+            ctx.lineTo(graph.width - 20, y);
+            ctx.fillText(data.max - i, 40, y);
+        }
+        ctx.strokeStyle = "rgba(0, 0, 0, .1)";
+        ctx.stroke();
+
+        // 그래프
+        let y = 65 + data.max * 4.5;
+        for(let i = 0; i < data.data.length; i++) {
+            let x = 75 + i * 45;
+            ctx.fillStyle = data.data[i].color;
+            ctx.fillRect(x, y - data.data[i].range * 4.5, 25, data.data[i].range * 4.5);
+        }
+
+        ctx.fillStyle = "rgba(0, 0, 0, .02)";
+        ctx.fillRect(50, y + 10, graph.width - 70, 30);
+
+        // 범례
+        for(let i = 0; i < data.data.length; i++) {
+            let x = 65 + i * 45;
+            ctx.fillStyle = data.data[i].color;
+		    ctx.fillRect(x, y + 20, 10, 10);
+
+            ctx.font = "11px Arial";
+            ctx.textAlign = "left";
+            ctx.fillStyle = "black";
+            ctx.fillText(data.data[i].city, x + 14, y + 25);
+        }
     }
-
-    function drop(e) {
-        e.preventDefault();
-
-        const car = e.dataTransfer.getData('text');
-        console.log(car);
-
-        e.target.appendChild(document.getElementById(car));
-    }
+    drowGraph();
 </script>
 </html>

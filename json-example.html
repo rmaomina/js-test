@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+    <title>json의 활용</title>
+</head>
+<body>
+    <h1>json 활용</h1>
+
+    <h2>json 기본 표기법</h2>
+    <div id="result1"></div>
+
+    <h2>json 배열 표기법</h2>
+    <div id="result2"></div>
+</body>
+<script>
+    $(document).ready(function(){
+        const profile = {
+            name: 'mina',
+            age: 31,
+            tel: '010-1122-2233',
+            address: 'seoul'
+        }
+
+        let msg1 = "";
+        msg1 = '이름: ' + profile.name + '<br/> 나이: ' + profile.age + '<br/> 휴대전화: ' + profile['tel'] + '<br/> 주소: ' + profile.address;
+
+        $('#result1').html(msg1);
+    });
+
+    showDog();
+
+    function showDog() {
+        const dog = [
+            {name: '멍멍이', age: 5, color: 'black'},
+            {name: '똥개', age: 2, color: 'white'},
+            {name: '바둑이', age: 10, color: 'black'}
+        ]
+
+        let msg = "";
+        msg += '이름: ' + dog[0].name + '<br/> 나이: ' + dog[0].age + '<br/> 색상: ' + dog[0].color + '<hr/>';
+        msg += '이름: ' + dog[1].name + '<br/> 나이: ' + dog[1].age + '<br/> 색상: ' + dog[1].color + '<hr/>';
+        msg += '이름: ' + dog[2].name + '<br/> 나이: ' + dog[2].age + '<br/> 색상: ' + dog[2].color;
+
+        document.getElementById("result2").innerHTML = msg;
+    }
+</script>
+</html>

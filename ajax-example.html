@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+    <title>AJAX 활용</title>
+</head>
+<body>
+    <h1>AJAX 함수</h1>
+    <h2>이름 출력하기</h2>
+    <form action="">
+        <label for="">이름을 입력하세요</label><br/>
+        <input type="text" name="username" id="username">
+        <input type="button" id="submit1" value="입력"><br/>
+    </form>
+    <div id="result1"></div>
+
+    <h2>두 수의 합 구하기</h2>
+    <form action="">
+        <label for="">두 수를 입력하세요</label><br/>
+        <p>x: <input type="text" name="xxx" id="xxx"></p>
+        <p>y: <input type="text" name="yyy" id="yyy"></p>
+        <input type="button" id="submit2" value="더하기"><br/>
+    </form>
+    <div id="result2"></div>
+</body>
+<script>
+    $(document).ready(function(){
+        $.getScript('src/ajax-sample1.js');
+
+        $('#submit1').click(function(){
+            let name = $('#username').val();
+            let sendData = setName(name);
+
+            $('#result1').html(sendData);
+        });
+
+        $('#submit2').click(function(){
+            let xxx = $('#xxx').val();
+            let yyy = $('#yyy').val();
+            let sendData = plusNums(xxx,yyy);
+
+            $('#result2').html(sendData);
+        });
+    });
+</script>
+</html>

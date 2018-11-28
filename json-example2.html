@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+    <title>json의 활용</title>
+</head>
+<body>
+    <h1>jQuery Ajx를 이용한 텍스트 불러오기</h1>
+    <div id="demo"></div>
+    <button type="button" id="btn1">텍스트1가져오기</button>
+    <button type="button" id="btn2">텍스트2가져오기</button>
+    <button type="button" id="btn3">테이블가져오기</button>
+</body>
+<script>
+    $(document).ready(function(){
+        $('#btn1').click(function(){
+            $('#demo').load('src/text-sample.txt #p1');
+        });
+
+        $('#btn2').click(function(){
+            $('#demo').load('src/text-sample.txt #p2');
+        });
+
+        $('#btn3').click(function(){
+            $('#demo').load('src/table-sample.txt');
+        });
+    });
+</script>
+</html>
