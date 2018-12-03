@@ -7,6 +7,10 @@ function splitProc(str) { //str = "id=imonster&pw=12345"
 
     const id = sid[1];
     const pw = spw[1];
+
+    const userinfo = [id, pw]
+
+    return userinfo;
     
-    return '사용자의 아이디는' + id + ', 비밀번호는 ' + pw + '입니다.';
+    // return '사용자의 아이디는' + id + ', 비밀번호는 ' + pw + '입니다.';
 }

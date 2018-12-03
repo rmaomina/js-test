@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+    <title>심플 앱 제작</title>
+</head>
+<style>
+    .wrong-msg {
+        display: none;
+        color: red;
+    }
+    .wrong-msg.active {
+        display: block;
+    }
+</style>
+<body>
+    <h1>심플 앱 제작</h1>
+    <div id="loginForm">
+        <div>아이디: <input type="text" id="userId"></div>
+        <div>비밀번호: <input type="text" id="userPw1"></div>
+        <div><input type="button" id="loginBtn" value="Login"></div>
+        <span class="wrong-msg">아이디와 패스워드를 입력하세요</span>
+        <div id="resultWrong"></div>
+    </div>
+    <br>
+    <div id="loginSuccess">
+        <div id="result"></div>
+        <hr>
+        <a href="./ajax-example.html">이전 작업으로 이동</a>
+    </div>
+</body>
+<script>
+    $(document).ready(function(){
+        $('.wrong-msg').removeClass('active');
+        $('#loginSuccess').hide();
+        
+        
+        $('#loginBtn').click(function(){
+            const userid = $('#userId').val();
+            const userpw1 = $('#userPw1').val();
+            const userpw2 = $('#userPw2').val();
+
+            if(userid == '' || userpw1 == '' || userpw2 == '') {
+                $('.wrong-msg').addClass('active');
+            } else {
+                $('.wrong-msg').removeClass('active');
+                // debugger;
+                $.getJSON('src/json-text.txt', function(data){
+                    $.each(data, function(i, obj){
+                        console.log('인덱스: ' + i + ', 이름: ' + obj.name);
+                        if(userid == obj.id && userpw1 == obj.pw) {
+                            $('#result').html(obj.name + '님 환영합니다. \n 현재 보유하신 포인트는 ' + obj.point + '점 입니다.');
+                            $('#loginForm').hide();
+                            $('#loginSuccess').show();
+                            return false;
+                        } else {
+                            $('#resultWrong').html('아이디 또는 비밀번호가 틀립니다. 다시 입력해 주세요.');
+                            $('#userId, #userPw1').val('');
+                            $('#userId').focus();
+                        }
+                    });
+                });
+            }
+        });
+    });
+</script>
+</html>

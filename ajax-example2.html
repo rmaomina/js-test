@@ -43,6 +43,7 @@
         <p>darkblue</p>
         <p>purple</p>
     </div>
+
     <h2>json 데이터 가져오기</h2>
     <input type="button" id="getJson" value="json데이터 가져오기">
     <div id="result"></div>
@@ -58,10 +59,9 @@
 
         $('#getJson').click(function(){
             $.getJSON('src/json-text.txt', function(data){
-                return alert(data.id + ', ' + data.pw);
+                console.log(data);
+                return alert(data[0].id + ', ' + data[0].pw);
             });
-            console.log(data);
-            // $('#result').text(data.id + ', ' + data.pw);
         })
     });
 </script>

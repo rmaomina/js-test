@@ -1,1 +1,32 @@
-{"id":"imonster","pw":1234}
+[
+    {
+        "id": "imonster",
+        "pw": 1234,
+        "name": "kim",
+        "point": 5285
+    },
+    {
+        "id": "rmaomina",
+        "pw": 1234,
+        "name": "lee",
+        "point": 1234555
+    },
+    {
+        "id": "minsun",
+        "pw": 1234,
+        "name": "sun",
+        "point": 808008
+    },
+    {
+        "id": "yj",
+        "pw": 1234,
+        "name": "yjname",
+        "point": 10293847
+    },
+    {
+        "id": "navi",
+        "pw": 1234,
+        "name": "naviname",
+        "point": 58577
+    }
+]

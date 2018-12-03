@@ -20,7 +20,7 @@
     </form>
     <div id="result1"></div>
 
-    <h2>서버로 form 쿼리스트링 전달하기</h2>
+    <h2>serialize로 쿼리스트링 서버에 전송하기</h2>
     <form action="" id="singupForm">
         아이디: <input type="text" name="userid"><br/>
         비밀번호: <input type="text" name="userpw"><br/><br/>
@@ -38,9 +38,12 @@
         $.getScript('src/split.js');
         $('#submit').click(function(){
             const query2 = $('form#singupForm').serialize();
-            const txt = splitProc(query2);
-            
-            $('#result2').text(splitProc(query2));
+            const userinfo = splitProc(query2);
+
+            console.log(userinfo[0] + ', ' + userinfo[1]);
+            const txt = '사용자의 아이디는' + userinfo[0] + ', 비밀번호는 ' + userinfo[1] + '입니다.';
+
+            $('#result2').text(txt);
         });
     });
 </script>
