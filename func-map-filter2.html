@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>func-each</title>
+</head>
+<body>
+</body>
+<script>
+
+//*** each로 _filter와 _map의 중복을 제거 ***//
+// - for문의 중복과 list[i]할당문의 중복을 제거
+function _filter(list, predi) {
+    let new_list = [];
+
+    _each(list, function(val){
+        if (predi(val)) new_list.push(val);
+    });
+
+    return new_list;
+    
+}
+
+function _map(list, mapper) {
+    let new_list = [];
+
+    _each(list, function(val){
+        new_list.push(mapper(val));
+    });
+
+    return new_list;
+}
+
+function _each(list, iter) {
+    for(let i = 0; i < list.length; i++) {
+        iter(list[i]);
+    }
+    return list;
+}
+
+let nums = [1,2,3,4,5,6,7,8,9,10];
+let users = [
+    { id: 1, name: 'ID', age: 36 },
+    { id: 2, name: 'BJ', age: 19 },
+    { id: 3, name: 'AK', age: 50 },
+    { id: 4, name: 'HA', age: 23 },
+    { id: 5, name: 'JE', age: 43 },
+    { id: 6, name: 'JU', age: 27 },
+    { id: 7, name: 'KM', age: 30 },
+    { id: 8, name: 'RD', age: 27 }
+];
+
+console.log(_filter(nums, function(num){return num % 2;}));
+console.log(_map(nums, function(num){return num* 10;}));
+
+console.log(
+    _map(
+        _filter(users, function(user){ return user.age >= 30; }), 
+        function(user) {return user.name;}
+    )
+);
+console.log(
+    _map(
+        _filter(users, function(user){ return user.age < 30; }), 
+        function(user) {return user.age;}
+    )
+);
+
+//*** 내부 다형성 (predicate, iteratee, mapper) ***//
+
+
+</script>
+</html>
